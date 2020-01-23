@@ -13,6 +13,3 @@ def obtain_definition(word):
         return tokenized_definition
     else:
         return []
-
-# a = obtain_definition("O_o")
-# print(a)
