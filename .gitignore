@@ -1,1 +1,4 @@
 glove*
+.vscode
+bin
+data
