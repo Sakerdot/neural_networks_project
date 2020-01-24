@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 # -*- coding: UTF-8 -*-
 
-# Author: Adrian Samatan
+# Authors: Jose Vallejo, Isaac Valdivia and Adrian Samatan
 
 if __name__ == "__main__":
     import pickle
@@ -48,8 +48,7 @@ if __name__ == "__main__":
     tokenized_tweets = [tokenize_tweet(tweet) for tweet in tweets]
 
     def obtain_definition(word):
-        url = 'http://api.urbandictionary.com/v0/define?term=' + word
-        resp = requests.get(url)
+        resp = requests.get('http://api.urbandictionary.com/v0/define', params={'term': word})
         res = resp.json()
         if 'list' in res and len(res['list']) != 0:
             first_def = res['list'][0]['definition']
@@ -60,7 +59,7 @@ if __name__ == "__main__":
             definition_vector = np.zeros(args.vector_size)
 
             count = 0
-            for i, word in enumerate(tokenized_definition):
+            for _, word in enumerate(tokenized_definition):
                 if word in word_embeddings:
                     count += 1
                     definition_vector += word_embeddings[word]
