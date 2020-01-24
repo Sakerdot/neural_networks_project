@@ -51,7 +51,7 @@ if __name__ == "__main__":
         url = 'http://api.urbandictionary.com/v0/define?term=' + word
         resp = requests.get(url)
         res = resp.json()
-        if len(res['list']) != 0:
+        if 'list' in res and len(res['list']) != 0:
             first_def = res['list'][0]['definition']
             first_def_wo_punctuation = first_def.translate(
                 str.maketrans('', '', string.punctuation))
@@ -92,4 +92,5 @@ if __name__ == "__main__":
             
             output.append((tweet_vectors, labels[i]))
 
-    pickle.dump(args.output_file)
+    with open(args.output_file, 'wb') as output_file:
+        pickle.dump(output, output_file)
